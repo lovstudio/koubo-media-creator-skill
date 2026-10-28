@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0 — 2026-10-28
+
+- 调用 ID 改为 `lov-koubo-media-creator`（源目录 `koubo-media-creator-skill`，Profile 命名空间 `skills.lov-koubo-media-creator`）；展示名「口播短片」与数据格式名 `talking-head-*/v1` 不变。
+
 ## 0.1.0 — 2026-10-28
 
 - 首版：片型语法（7 条代表作转写、上半屏切点与 30 张封面量化）、五种片型公式、`script.json` 规范。

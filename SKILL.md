@@ -1,5 +1,5 @@
 ---
-name: lov-talking-head-media-creator
+name: lov-koubo-media-creator
 description: >
   口播短片：输入一个主题，产出 AI 工具类竖版口播的调研、脚本、提词器、上屏素材与封面；作者录完口播后自动剪成上素材下出镜的成片。
   Use for 做一条口播短视频、topic to talking-head short.
@@ -14,7 +14,7 @@ depends_on:
   - lov-branding-consistency
 metadata:
   author: lovstudio
-  version: "0.1.0"
+  version: "0.2.0"
   card_standard: lovstudio/skill-card/v1
   content_class: authored-prose
   suite: lov-film
@@ -63,12 +63,12 @@ metadata:
 ## User Profile (cross-session)
 
 每次运行读取 `skill.yaml` 声明的 `user-profile/v1`：作者名与账号名（水印、片尾）、官方 Logo（浅色版）、头像、
-形象照、字体、默认 ASR、命名规则、输出目录，以及 `skills.lov-talking-head-media-creator.records`
+形象照、字体、默认 ASR、命名规则、输出目录，以及 `skills.lov-koubo-media-creator.records`
 （默认片型、语速、TTS 音色、片尾一句话、默认平台）。顺序：当前请求 → 项目上下文 → 本 Skill 记录 → 共享偏好 →
 用户/品牌 Profile → 默认值。作者直接说出的长期偏好立即写回并报告路径：
 
 ```bash
-python3 "$SKILL_DIR/scripts/profile_store.py" record --skill-id lov-talking-head-media-creator --path records.end_line --value "关注我，一起把 AI 用进真实工作流" --confirm
+python3 "$SKILL_DIR/scripts/profile_store.py" record --skill-id lov-koubo-media-creator --path records.end_line --value "关注我，一起把 AI 用进真实工作流" --confirm
 ```
 
 推断值只留在本次。完整契约见 [references/user-profile.md](references/user-profile.md)。

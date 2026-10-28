@@ -1,6 +1,6 @@
-# Skill Card — 口播短片 · Talking-head Short（lov-talking-head-media-creator）
+# Skill Card — 口播短片 · Talking-head Short（lov-koubo-media-creator）
 
-> 版本 0.1.0 · MIT · Lovstudio.AI
+> 版本 0.2.0 · MIT · Lovstudio.AI
 
 ## Description
 
@@ -55,7 +55,7 @@ MIT。生成物著作权归作者；片中第三方网页截图须注明来源�
 
 ## Skill Version
 
-0.1.0（2026-10-28）
+0.2.0（2026-10-28）
 
 ## Ethical Considerations
 

@@ -74,7 +74,7 @@ an initialization mode.
 
 | 路径 | 用途 |
 | --- | --- |
-| `user.name`、`skills.lov-talking-head-media-creator.records.handle` | 水印（无 Logo 时）、片尾名字 |
+| `user.name`、`skills.lov-koubo-media-creator.records.handle` | 水印（无 Logo 时）、片尾名字 |
 | `brand.logo` | 浅色官方 Logo：水印、片尾、封面；有 Logo 时优先于文字水印 |
 | `brand.avatar` | 片尾关注卡头像 |
 | `brand.portrait` | 样片占位形象照（按原尺寸显示，放大不超过 1.1×） |
