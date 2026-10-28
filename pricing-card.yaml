@@ -1,0 +1,10 @@
+schema: lovstudio/pricing-card/v1
+version: "0.1.0"
+model: free
+currency: CNY
+list_price_cny: 0
+value_anchor: "替代一条口播短视频录制前后的写稿、找证据、提词、剪辑、包装与封面，约半天到一天的人工"
+basis: "首版只有一个样片案例（TTS 占位配音），还没有作者真人录制并发布的成片与播放数据，先免费积累真实案例。"
+boundary: "包含脚本门禁、提词器、证据截图、录音对齐、竖版成片模板、封面与质检；不含 Seed-TTS、Lyria 等第三方调用费用（按次记账，由使用者承担）。"
+review_trigger: "累计 3 条作者真人录制并发布的成片、拿到播放与完播数据后重新评估价格与付费边界。"
+confidence: internal
