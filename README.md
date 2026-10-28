@@ -1,6 +1,6 @@
 # 口播短片 · Talking-head Short
 
-![version](https://img.shields.io/badge/version-0.2.0-orange)
+![version](https://img.shields.io/badge/version-0.2.1-orange)
 
 输入一个主题，Agent 交付 AI 工具类竖版口播短片的全部前期：带出处的事实、按片型写好并过门禁的脚本、提词器、上屏证据截图、封面。
 你照提词器竖拍一条口播（念错了停半拍整句重读即可），它自动挑出每句最后念对的一遍、剪掉停顿，排成「上半屏证据、下半屏出镜、字幕压在交界」的成片，配乐、封面、质检报告一起交。
@@ -13,7 +13,7 @@
 npx lovstudio skills add koubo-media-creator
 ```
 
-付费 Skill：在 Lovstudio.AI 官网登录并购买（1,394 Credits）后安装，源码按版本下载为明文文件。
+付费 Skill：在 Lovstudio.AI 官网获取访问权限后安装（当前随 Lovstudio.AI VIP 会员解锁），源码按版本下载为明文文件。
 
 ## 用法
 
