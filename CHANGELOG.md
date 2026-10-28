@@ -2,6 +2,7 @@
 
 ## 0.2.0 — 2026-10-28
 
+- 首发上架 Lovstudio.AI 官网：一次性付费 1,394 Credits，源码私有（2026-10-29 定价）。
 - 调用 ID 改为 `lov-koubo-media-creator`（源目录 `koubo-media-creator-skill`，Profile 命名空间 `skills.lov-koubo-media-creator`）；展示名「口播短片」与数据格式名 `talking-head-*/v1` 不变。
 
 ## 0.1.0 — 2026-10-28

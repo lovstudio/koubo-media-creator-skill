@@ -86,15 +86,15 @@ dimensions:
     evidence: "样片从脚本到 v0.2 成片与两张封面全部由脚本链路生成；作者侧只剩照提词器录制一项"
     score: null
 pricing:
-  model: free
+  model: one_time
   currency: CNY
-  list_price_cny: 0
-  basis: "首版只有一个内部样片案例，尚无作者真人录制的成片；先免费积累真实案例"
-  boundary: "包含脚本门禁、提词器、证据截图、对齐、成片模板、封面与质检；不含 AI 配乐与 TTS 的第三方费用"
-  review_trigger: "有 3 条作者真人录制并发布的成片、且有播放数据后重新评估"
-  confidence: internal
+  list_price_cny: 99
+  basis: "1,394 Credits 一次性购买（作者 2026-10-29 定价），与同系列视频制作 Skill 一致；不是代剪或代制作报价"
+  boundary: "含片型语法、脚本门禁、提词器、证据截图、录音对齐、竖版起步工程、封面与质检脚本；不含第三方服务费用、字体商用授权与人工代剪"
+  review_trigger: "第 3 条真人录制成片发布、首发 30 天、10 次真实使用或版本大改时复评"
+  confidence: low
 distribution:
-  paid: []
-  free:
-    - github
+  # Lovstudio.AI 官网一次性购买（2026-10-29 选定）；源码仓库私有，不进入免费镜像
+  paid:
     - lovstudio
+  free: []

@@ -10,8 +10,10 @@
 ## 安装
 
 ```bash
-npx skills add lov-koubo-media-creator -g -y
+npx lovstudio skills add koubo-media-creator
 ```
+
+付费 Skill：在 Lovstudio.AI 官网登录并购买（1,394 Credits）后安装，源码按版本下载为明文文件。
 
 ## 用法
 
