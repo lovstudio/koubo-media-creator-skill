@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 — 2026-10-30
+
+- README 安装命令改回官方的 `npx lovstudio skills add koubo-media-creator`（免费直接安装）。
+
 ## 0.3.0 — 2026-10-30
 
 - 以 MIT 协议开源，源码仓库公开；停止付费销售。
