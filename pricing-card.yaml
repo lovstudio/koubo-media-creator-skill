@@ -1,14 +1,13 @@
 schema: lovstudio/pricing-card/v1
-version: "0.2.1"
-model: one_time
+version: "0.3.0"
+model: free
 currency: CNY
-list_price_cny: 99
-status: "作者于 2026-10-29 选择官网一次性付费 1,394 Credits，与同系列视频制作 Skill 一致；源码私有，不进入免费镜像"
-value_anchor: "每条口播保守可省 3–6 小时的写稿查证、截图分镜、剪辑字幕与封面；前 3 条即可覆盖价格"
-basis: "官网一次性购买 1,394 Credits（作者定价）。六维加权 2.93/5，模型推荐免费入口先积累真人成片证据；作者选择付费，因此首发价不上浮、复评条件收紧到 3 条真人成片。价格位于成本底线区间内、显著低于价值锚点"
+list_price_cny: 0
+status: "作者于 2026-10-30 决定以 MIT 协议开源，停止付费销售；0.2.x 曾在 Lovstudio.AI 官网以一次性 1,394 Credits 发布"
+basis: "作者决定开源，源码公开，不再收费"
 boundary: "包含片型语法、脚本门禁、提词器、证据截图、录音对齐、Remotion 竖版起步工程、封面与质检脚本；不包含数字人或声音克隆、他人素材授权、TTS 与 AI 配乐等第三方费用、字体商用授权、人工代剪与代发布"
-review_trigger: "第 3 条真人录制成片发布、首发 30 天、10 次真实使用、版本大改、Remotion 主版本或支持成本明显变化时复评"
+review_trigger: "不再按付费能力复评；版本大改或维护成本明显变化时复查"
 confidence: low
 evidence_gaps:
   - "只有一条 TTS 占位配音与形象照占位的样片，尚无真人录制成片"
-  - "没有外部买家使用与播放、完播数据"
+  - "没有外部使用与播放、完播数据"

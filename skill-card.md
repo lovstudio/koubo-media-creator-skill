@@ -1,6 +1,6 @@
 # Skill Card — 口播短片 · Talking-head Short（lov-koubo-media-creator）
 
-> 版本 0.2.1 · MIT · Lovstudio.AI
+> 版本 0.3.0 · MIT · Lovstudio.AI
 
 ## Description
 
@@ -55,7 +55,7 @@ MIT。生成物著作权归作者；片中第三方网页截图须注明来源�
 
 ## Skill Version
 
-0.2.1（2026-10-29）
+0.3.0（2026-10-30）
 
 ## Ethical Considerations
 
@@ -79,10 +79,9 @@ MIT。生成物著作权归作者；片中第三方网页截图须注明来源�
 
 ### Pricing Basis
 
-1,394 Credits，官网一次性购买（作者 2026-10-29 定价），与同系列视频制作 Skill 一致。六维加权 2.93 / 5，模型推荐免费入口先积累真人成片；
-作者选择付费，因此首发价不上浮，第 3 条真人录制成片发布或首发 30 天时复评。
+免费开源（MIT）。作者于 2026-10-30 决定开源并停止付费销售；0.2.x 曾在 Lovstudio.AI 官网以一次性 1,394 Credits 发布。
 
 ### Distribution
 
-- 付费渠道：Lovstudio.AI 官网（源码私有，购买后按版本下载）
-- 免费渠道：无
+- 免费渠道：GitHub 公开仓库（MIT）
+- 付费渠道：无（已停止）

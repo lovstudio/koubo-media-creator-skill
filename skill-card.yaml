@@ -1,5 +1,5 @@
 schema: lovstudio/skill-card/v1
-version: "0.2.1"
+version: "0.3.0"
 description: "口播短片：输入一个主题，产出 AI 工具类竖版口播的带出处事实、过门禁的脚本、提词器、上屏证据与封面；作者竖拍一条口播后，自动挑出每句最后念对的一遍、剪掉停顿，排成上半屏证据、下半屏作者的竖版成片，并交配乐、封面与质检报告。"
 owner:
   team: "Lovstudio.AI"
@@ -86,15 +86,16 @@ dimensions:
     evidence: "样片从脚本到 v0.2 成片与两张封面全部由脚本链路生成；作者侧只剩照提词器录制一项"
     score: null
 pricing:
-  model: one_time
+  model: free
   currency: CNY
-  list_price_cny: 99
-  basis: "1,394 Credits 一次性购买（作者 2026-10-29 定价），与同系列视频制作 Skill 一致；不是代剪或代制作报价"
+  list_price_cny: 0
+  basis: "作者于 2026-10-30 决定以 MIT 协议开源，停止付费销售；0.2.x 曾在 Lovstudio.AI 官网以一次性 1,394 Credits 发布"
   boundary: "含片型语法、脚本门禁、提词器、证据截图、录音对齐、竖版起步工程、封面与质检脚本；不含第三方服务费用、字体商用授权与人工代剪"
-  review_trigger: "第 3 条真人录制成片发布、首发 30 天、10 次真实使用或版本大改时复评"
+  review_trigger: "不再按付费能力复评；版本大改或维护成本明显变化时复查"
   confidence: low
 distribution:
-  # Lovstudio.AI 官网一次性购买（2026-10-29 选定）；源码仓库私有，不进入免费镜像
-  paid:
-    - lovstudio
-  free: []
+  # 2026-10-30 起以 MIT 协议开源，源码仓库公开
+  paid: []
+  free:
+    - channel: github
+      status: public
