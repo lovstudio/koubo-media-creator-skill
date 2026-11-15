@@ -8,16 +8,25 @@ The animatic lets the author judge pacing, shots and packaging before recording;
 --simulate-retakes inserts, before each listed line, a broken first attempt (its first ~45% plus a
 filler) so align.py's "last good take" choice can be regression-tested; the ground truth goes to
 <out>.json. --lead adds silence where the author would hold the cover pose.
-Per-line audio is cached by text+speaker+rate under <out dir>/tts/. Needs VOICENGINE_API_KEY (env only,
-never printed); every request is one line in the ledger (characters; the provider bills per character).
+The same truth is also written as <out>.words.json, the `[{w, s, e}]` input of `align.py --words`: one
+entry per phrase (split at punctuation), its edges at the longest pauses inside the line's known window,
+so an animatic is aligned without any ASR (every line scores 1.00, cuts land on the real line edges).
+Per-line audio is cached by text+speaker+rate under <out dir>/tts/; a rerun with the same arguments costs
+nothing and rebuilds the take and both JSON files. Needs VOICENGINE_API_KEY (env only, never printed);
+every request is one line in the ledger (characters; the provider bills per character).
 """
 import argparse
+import array
 import base64
 import datetime
 import hashlib
 import json
+import math
+import operator
 import os
+import re
 import subprocess
+import sys
 import tempfile
 import urllib.request
 import uuid
@@ -25,6 +34,8 @@ from pathlib import Path
 
 URL = "https://openspeech.bytedance.com/api/v3/tts/unidirectional"
 SR = 48000
+HOP = 0.01
+PHRASE = re.compile(r"[，。！？、：；,.!?:;…]+")
 
 
 def synth(text, speaker, rate):
@@ -56,6 +67,63 @@ def to_pcm(mp3: bytes) -> bytes:
         return subprocess.check_output(["ffmpeg", "-v", "error", "-i", f.name, "-af",
                                         "silenceremove=start_periods=1:start_threshold=-45dB:stop_periods=-1:stop_threshold=-45dB:stop_duration=0.15",
                                         "-ac", "1", "-ar", str(SR), "-f", "s16le", "-"])
+
+
+def envelope_db(media: Path):
+    """10 ms RMS envelope (dBFS) of the take at 16 kHz, the same envelope align.py cuts on
+    (at 48 kHz the fricatives' high band changes which of the short TTS pauses read as quiet)."""
+    raw = subprocess.check_output(["ffmpeg", "-v", "error", "-i", str(media), "-ac", "1", "-ar", "16000",
+                                   "-f", "f32le", "-"])
+    x = array.array("f", raw)
+    if sys.byteorder == "big":
+        x.byteswap()
+    n = int(16000 * HOP)
+    return [20 * math.log10(math.sqrt(sum(map(operator.mul, f, f)) / n) + 1e-9)
+            for f in (x[i:i + n] for i in range(0, len(x) - n + 1, n))]
+
+
+def percentile(v, q):
+    s = sorted(v)
+    k = (len(s) - 1) * q / 100
+    f = int(k)
+    return s[f] + (s[min(f + 1, len(s) - 1)] - s[f]) * (k - f)
+
+
+def quiet_runs(db, lo, hi, thr, min_len=6):
+    runs, start = [], None
+    for i in range(lo, hi):
+        if db[i] < thr:
+            if start is None:
+                start = i
+        elif start is not None:
+            if i - start >= min_len:
+                runs.append((start, i))
+            start = None
+    return runs
+
+
+def truth_words(db, truth):
+    """Phrase-level `[{w, s, e}]` inside each known line window; phrase edges are the line's longest pauses."""
+    # the take is padded with digital silence between lines; keep it out of the noise floor
+    thr = percentile([v for v in db if v > -120], 20) + 6
+    words = []
+    for t in truth:
+        phrases = [p for p in PHRASE.split(t["text"]) if p.strip()]
+        lo, hi = int(t["from"] / HOP), int(t["to"] / HOP)
+        runs = quiet_runs(db, lo + 5, hi - 5, thr) if len(phrases) > 1 else []
+        runs = sorted(sorted(runs, key=lambda r: r[0] - r[1])[: len(phrases) - 1])
+        if len(runs) == len(phrases) - 1:
+            s = t["from"]
+            for p, (q0, q1) in zip(phrases, [(r[0] * HOP, r[1] * HOP) for r in runs] + [(t["to"], t["to"])]):
+                words.append({"w": p, "s": round(s, 3), "e": round(q0, 3)})
+                s = q1
+        else:  # fewer clean pauses than phrase breaks: share the window by character count
+            total, s = sum(len(p) for p in phrases) or 1, t["from"]
+            for p in phrases:
+                e = s + (t["to"] - t["from"]) * len(p) / total
+                words.append({"w": p, "s": round(s, 3), "e": round(e, 3)})
+                s = e
+    return words
 
 
 def main():
@@ -119,9 +187,13 @@ def main():
                    input=bytes(pcm), check=True)
     out.with_suffix(".json").write_text(json.dumps({"speaker": a.speaker, "rate": a.rate, "lead": a.lead, "takes": truth},
                                                    ensure_ascii=False, indent=1))
+    words = truth_words(envelope_db(out), truth)
+    words_path = out.with_suffix(".words.json")
+    words_path.write_text(json.dumps(words, ensure_ascii=False, indent=0))
     spoken = sum(len(j[2]) for j in jobs if j[0] == "take")
     take_time = sum(x["to"] - x["from"] for x in truth if x["kind"] == "take")
-    print(json.dumps({"out": str(out), "seconds": round(t + 1.0, 2), "requests": len(need), "chars_billed": chars,
+    print(json.dumps({"out": str(out), "words": str(words_path), "phrases": len(words), "seconds": round(t + 1.0, 2),
+                      "requests": len(need), "chars_billed": chars,
                       "chars_per_second": round(spoken / take_time, 2) if take_time else None}, ensure_ascii=False))
 
 
