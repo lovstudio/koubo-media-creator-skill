@@ -18,7 +18,7 @@ dependencies:
     install: "npx -y lovstudio@latest skills add logo-sting -y"
 metadata:
   author: lovstudio
-  version: "0.5.0"
+  version: "0.5.1"
   card_standard: lovstudio/skill-card/v1
   content_class: authored-prose
   suite: lov-film
